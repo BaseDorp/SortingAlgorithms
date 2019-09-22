@@ -50,23 +50,6 @@ namespace SortingAlgorithms
             }
             Console.Write("\n");
         }
-
-        public static List<Guid> BubbleSort(List<Guid> theData)
-        {
-            int b;
-            for (int s = 0; s <= guidsListLength - 2; s++)
-            {
-                for (int r = 0; r <= guidsListLength - 2; r++)
-                {
-                    if (Guid1IsGreater(theGuids[r], theGuids[r + 1]))
-                    {
-                        b = theGuids[r + 1];
-                        theGuids[r + 1] = theGuids[r];
-                        theGuids[r] = b;
-                    }
-                }
-            }
-        }
         /// <summary>
         /// For the sake of comparing guids, this function returns true when the first guid is greater than the second, determined by the Guid.CompareTo method.
         /// Guid.CompareTo's documentation on how it compares:
@@ -86,21 +69,49 @@ namespace SortingAlgorithms
             else
                 return false;
         }
-        public static List<Double> BubbleSort(List<double> theData)
+
+        /// <summary>
+        /// Bubble Sort Method: Jared Bronstein
+        /// References
+        /// <see cref="https://www.w3resource.com/csharp-exercises/searching-and-sorting-algorithm/searching-and-sorting-algorithm-exercise-3.php"/>
+        /// <see cref="https://www.geeksforgeeks.org/bubble-sort/"/>
+        /// <see cref="https://www.c-sharpcorner.com/UploadFile/3d39b4/bubble-sort-in-C-Sharp/"/>
+        /// </summary>
+        /// <param name="theData">The list of Guids or Doubles provided by the CSV file</param>
+        /// <returns>The sorted list of the CSV file data</returns>
+        public static List<Guid> BubbleSort(List<Guid> theData)
         {
             int b;
-            for (int s = 0; s <= doublesListLength - 2; s++)
+            for (int s = 0; s <= theData.length - 2; s++)
             {
-                for(int r = 0; r <= doublesListLength - 2; r++)
+                for (int r = 0; r <= theData.length - 2; r++)
                 {
-                    if(theDoubles[r] > theDoubles[r+1])
+                    if (Guid1IsGreater(theData[r], theData[r + 1]))
                     {
-                        b = theDoubles[r + 1];
-                        theDoubles[r + 1] = theDoubles[r];
-                        theDoubles[r] = b;
+                        b = theData[r + 1];
+                        theData[r + 1] = theData[r];
+                        theData[r] = b;
                     }
                 }
             }
+            return 0;
+        }
+        public static List<Double> BubbleSort(List<double> theData)
+        {
+            int b;
+            for (int s = 0; s <= theData.Length - 2; s++)
+            {
+                for(int r = 0; r <=theData.length - 2; r++)
+                {
+                    if(theData[r] > theData[r+1])
+                    {
+                        b = theData[r + 1];
+                        theData[r + 1] = theData[r];
+                        theData[r] = b;
+                    }
+                }
+            }
+            return 0;
         }
     }
 }
