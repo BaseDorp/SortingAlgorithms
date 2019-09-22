@@ -30,7 +30,7 @@ namespace SortingAlgorithms
         {
             using (var streamReader = new StreamReader(@"C:\CSVfolder\jc-ma.csv"))//this is the location of the CSV file it will read
             {
-                while(!streamReader.EndOfStream)
+                while (!streamReader.EndOfStream)
                 {
                     var line = streamReader.ReadLine();
                     var values = line.Split(',');
@@ -46,7 +46,7 @@ namespace SortingAlgorithms
 
         public static void ShowElementsOfList(List<Double> d)
         {
-            foreach(var element in d)
+            foreach (var element in d)
             {
                 Console.Write(element + " ");
             }
@@ -61,16 +61,43 @@ namespace SortingAlgorithms
             Console.Write("\n");
         }
 
+        public static double getMaximumValue(List<Double> dList)//finds the largest double in the list, for bucket sort
+        {
+            double maximumValue = dList[0];
+            int listSize = dList.Count;
+            for (int i = 1; i < listSize; i++)
+            {
+                if(dList[i] > maximumValue)
+                {
+                    maximumValue = dList[i];
+                }
+            }
+            return maximumValue;
+        }
+        public static double getMinimumValue(List<Double> dList)//finds the smallest double in the list, for bucket sort
+        {
+            double minimumValue = dList[0];
+            int listSize = dList.Count;
+            for (int i = 1; i < listSize; i++)
+            {
+                if (dList[i] < minimumValue)
+                {
+                    minimumValue = dList[i];
+                }
+            }
+            return minimumValue;
+        }
+
         /// <summary>
-        /// Justin's Radix Sorts
+        /// Justin's Bucket Sorts
         /// </summary>
         /// <param name="theData"></param>
         /// <returns></returns>
-        public static List<Guid> RadixSort(List<Guid> theData)
+        public static List<Guid> BucketSort(List<Guid> theData)
         {
             return new List<Guid>();
         }
-        public static List<Double> RadixSort(List<Double> theData)
+        public static List<Double> BucketSort(List<Double> theData)
         {
             return new List<Double>();
         }
@@ -86,32 +113,25 @@ namespace SortingAlgorithms
         /// <returns></returns>
         /// 
 
-        public static int ShellSort(List<Double> dList)//Time complexity: O(N^2). Gap is reduced by half every iteration. too few gaps slow down the passes, and too many gaps produces overhead.
+        public static int ShellSort(List<Double> dList)//Time complexity: O(N^2). Gap size is reduced by half every iteration. too few gaps slow down the passes, and too many gaps produces overhead
         {
             int n = dList.Count;//n is the size of our list
 
-            // Sort using large gaps, and reduce gap size gradually
-            for (int gap = n / 2; gap > 0; gap /= 2)//our gaps will be 500k, then 250k, then 125k, etc... until
+            //Sort using large gaps, and reduce gap size gradually
+            for (int gap = n / 2; gap > 0; gap /= 2)//our gap sizes will be 500k, then 250k, then 125k, etc...
             {
-                // Perform insertion sorts using the current gap size
-                // The first gap elements dList[0..gap-1] are already 
-                // in gapped order keep adding one more element 
-                // until the entire array is gap sorted 
+                //Perform insertion sorts using the current gap size
                 for (int i = gap; i < n; i += 1)
                 {
-                    // add dList[i] to the elements that have 
-                    // been gap sorted save dList[i] in temp and 
-                    // make a hole at position i 
+
                     double temp = dList[i];
 
-                    // shift earlier gap-sorted elements up until 
-                    // the correct location for dList[i] is found 
+                    //Move previously sorted elements forwards to find the right spot for this one
                     int j;
                     for (j = i; j >= gap && dList[j - gap] > temp; j -= gap)
                         dList[j] = dList[j - gap];
 
-                    // put temp (the original dList[i])  
-                    // in its correct location 
+                    //Put temp where it belongs
                     dList[j] = temp;
                 }
             }
