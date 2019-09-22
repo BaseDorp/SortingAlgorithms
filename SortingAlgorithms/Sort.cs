@@ -6,5 +6,6 @@ namespace SortingAlgorithms
 {
     class Sort
     {
+
     }
 }
