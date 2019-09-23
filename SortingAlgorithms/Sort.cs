@@ -113,7 +113,7 @@ namespace SortingAlgorithms
         /// <returns></returns>
         /// 
 
-        public static int ShellSort(List<Double> dList)//Time complexity: O(N^2). Gap size is reduced by half every iteration. too few gaps slow down the passes, and too many gaps produces overhead
+        public static void ShellSort(List<Double> dList)//Time complexity: O(N^2). Gap size is reduced by half every iteration. too few gaps slow down the passes, and too many gaps produces overhead
         {
             int n = dList.Count;//n is the size of our list
 
@@ -135,7 +135,6 @@ namespace SortingAlgorithms
                     dList[j] = temp;
                 }
             }
-            return 0;
         }
         /// <summary>
         /// For the sake of comparing guids, this function returns true when the first guid is greater than the second, determined by the Guid.CompareTo method.
@@ -156,7 +155,7 @@ namespace SortingAlgorithms
             else
                 return false;
         }
-        public static int ShellSort(List<Guid> gList)
+        public static void ShellSort(List<Guid> gList)
         {
             int n = gList.Count;
 
@@ -175,7 +174,6 @@ namespace SortingAlgorithms
                     gList[j] = temp;
                 }
             }
-            return 0;
         }
     }
 }
