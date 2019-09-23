@@ -6,7 +6,9 @@ namespace SortingAlgorithms
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Sort s = new Sort();
+            Console.WriteLine("Program Complete. Press any key to continue ...");
+            Console.ReadKey();
         }
     }
 }
