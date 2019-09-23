@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Numerics;
 
 namespace SortingAlgorithms
 {
@@ -147,13 +148,22 @@ namespace SortingAlgorithms
         /// Otherwise, it returns 0 to indicate that the two Guid values are equal.
         /// 
         /// In its example, it demonstrates that a value of -1 is "less than", 0 is "equals", and 1 is "greater than".
+        /// int intValue = int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
         /// </summary>
-        static bool Guid1IsGreater(Guid guid1, Guid guid2)
+        static bool Guid1IsGreater(Guid guid1, Guid guid2)//alternative method: split guid into string substrings, parseint, do what CompareTo does
         {
-            if (guid1.CompareTo(guid2) == 1)
+            BigInteger bigInt1 = GuidToBigInt(guid1);
+            BigInteger bigInt2 = GuidToBigInt(guid2);
+            if (bigInt1 > bigInt2)
                 return true;
             else
                 return false;
+        }
+
+        static BigInteger GuidToBigInt(Guid g)
+        {
+            BigInteger bigInt = new BigInteger(g.ToByteArray());
+            return bigInt;
         }
         public static void ShellSort(List<Guid> gList)
         {
