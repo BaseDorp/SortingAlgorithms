@@ -205,24 +205,7 @@ namespace SortingAlgorithms
                 }
             }
         }
-        /// <summary>
-        /// For the sake of comparing guids, this function returns true when the first guid is greater than the second, determined by turning the Guids into BigInts and comparing those values
-        /// </summary>
-        static bool Guid1IsGreater(Guid guid1, Guid guid2)//alternative method: split guid into string substrings, parseint, do what CompareTo does
-        {
-            BigInteger bigInt1 = GuidToBigInt(guid1);
-            BigInteger bigInt2 = GuidToBigInt(guid2);
-            if (bigInt1 > bigInt2)
-                return true;
-            else
-                return false;
-        }
 
-        static BigInteger GuidToBigInt(Guid g)
-        {
-            BigInteger bigInt = new BigInteger(g.ToByteArray());
-            return bigInt;
-        }
         public static void ShellSort(List<Guid> gList)
         {
             int n = gList.Count;
@@ -236,12 +219,61 @@ namespace SortingAlgorithms
 
 
                     int j;
-                    for (j = i; j >= gap &&  Guid1IsGreater(gList[j - gap], temp); j -= gap)
+                    for (j = i; j >= gap && Guid1IsGreaterUsingLong(gList[j - gap], temp); j -= gap)
                         gList[j] = gList[j - gap];
 
                     gList[j] = temp;
                 }
             }
+        }
+        /// <summary>
+        /// This version of guid comparison uses GuidToBigInt, which uses Guid.ToByteArray
+        /// </summary>
+        public static bool Guid1IsGreater(Guid guid1, Guid guid2)
+        {
+            BigInteger bigInt1 = GuidToBigInt(guid1);
+            BigInteger bigInt2 = GuidToBigInt(guid2);
+            if (bigInt1 > bigInt2)
+                return true;
+            else
+                return false;
+        }
+        /// <summary>
+        /// This version of guid comparison uses GuidToLong, which separates the guid via its delimiters, converts each part of the guid to a long, and sums them to compare the final values
+        /// </summary>
+        public static bool Guid1IsGreaterUsingLong(Guid guid1, Guid guid2)
+        {
+            long long1 = GuidToLong(guid1);
+            long long2 = GuidToLong(guid2);
+            if (long1 > long2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        static BigInteger GuidToBigInt(Guid g)
+        {
+            BigInteger bigInt = new BigInteger(g.ToByteArray());
+            return bigInt;
+        }
+
+        public static long GuidToLong(Guid g)
+        {
+            var line = g.ToString();
+            var values = line.Split('-');
+            var part1 = long.Parse(values[0], System.Globalization.NumberStyles.HexNumber);
+            var part2 = long.Parse(values[1], System.Globalization.NumberStyles.HexNumber);
+            var part3 = long.Parse(values[2], System.Globalization.NumberStyles.HexNumber);
+            var part4 = long.Parse(values[3], System.Globalization.NumberStyles.HexNumber);
+            var part5 = long.Parse(values[4], System.Globalization.NumberStyles.HexNumber);
+
+            long totalValue = part1 + part2 + part3 + part4 + part5;
+
+            return totalValue;
         }
     }
 }
