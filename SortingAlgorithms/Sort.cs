@@ -20,6 +20,7 @@ namespace SortingAlgorithms
         public static List<int> theInts = new List<int>();
         public static List<Guid> theGuids = new List<Guid>();
         public static List<Double> theDoubles = new List<Double>();
+        public static double[] doublesArray;
 
         public static int guidsListLength;
         public static int doublesListLength;
@@ -42,6 +43,7 @@ namespace SortingAlgorithms
                     guidsListLength = theGuids.Count;
                     doublesListLength = theDoubles.Count;
                 }
+                doublesArray = theDoubles.ToArray();
             }
         }
 
@@ -61,6 +63,10 @@ namespace SortingAlgorithms
             }
             Console.Write("\n");
         }
+
+        /////////////////////////////////////////////
+        /// Functions used in bucket sort
+
 
         public static double getMaximumValue(List<Double> dList)//finds the largest double in the list, for bucket sort
         {
@@ -89,6 +95,51 @@ namespace SortingAlgorithms
             return minimumValue;
         }
 
+        public static void Scatter(double[] array, List<List<double>> buckets)
+        {
+            foreach (double value in array)
+            {
+                int bucketNumber = GetBucketNumber(value);
+                buckets[bucketNumber].Add(value);
+            }
+        }
+
+        public static void InsertionSort(double[] array)
+        {
+            int j;
+            double temp;
+
+            for (int i = 1; i < array.Length; i++)
+            {
+                j = i;
+                while (j > 0 && array[j] < array[j - 1])
+                {
+                    temp = array[j];
+                    array[j] = array[j - 1];
+                    array[j - 1] = temp;
+                    j--;
+                }
+            }
+        }
+
+        public static int GetBucketNumber(double value)
+        {
+            double val = value % 10;
+            int bucketNumber = (int)Math.Floor(val);
+            return bucketNumber;
+        }
+
+        public static void InitializeBuckets(List<List<double>> buckets)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                List<double> a = new List<double>();
+                buckets.Add(a);
+            }
+        }
+        
+        ///////////////////////////////////////////////////////////
+
         /// <summary>
         /// Justin's Bucket Sorts
         /// </summary>
@@ -98,9 +149,26 @@ namespace SortingAlgorithms
         {
             return new List<Guid>();
         }
-        public static List<Double> BucketSort(List<Double> theData)
+        public static double[] BucketSort(double[] array)
         {
-            return new List<Double>();
+            List<List<double>> buckets = new List<List<double>>();
+            InitializeBuckets(buckets);
+
+            Scatter(array, buckets);
+
+            int i = 0;
+            foreach (List<double> bucket in buckets)
+            {
+                double[] arr = bucket.ToArray();
+                InsertionSort(arr);
+
+                foreach (double d in arr)
+                {
+                    array[i++] = d;
+                }
+            }
+
+            return array;
         }
 
         /// <summary>
@@ -138,17 +206,7 @@ namespace SortingAlgorithms
             }
         }
         /// <summary>
-        /// For the sake of comparing guids, this function returns true when the first guid is greater than the second, determined by the Guid.CompareTo method.
-        /// Guid.CompareTo's documentation on how it compares:
-        /// The CompareTo method compares the GUIDs as if they were values provided to the Guid(Int32, Int16, Int16, Byte[]) constructor, as follows:
-        /// It compares the UInt32 values, and returns a result if they are unequal. If they are equal, it performs the next comparison.
-        /// It compares the first UInt16 values, and returns a result if they are unequal. If they are equal, it performs the next comparison.
-        /// It compares the second UInt16 values, and returns a result if they are unequal. If they are equal, it performs the next comparison.
-        /// If performs a byte-by-byte comparison of the next eight Byte values. When it encounters the first unequal pair, it returns the result.
-        /// Otherwise, it returns 0 to indicate that the two Guid values are equal.
-        /// 
-        /// In its example, it demonstrates that a value of -1 is "less than", 0 is "equals", and 1 is "greater than".
-        /// int intValue = int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
+        /// For the sake of comparing guids, this function returns true when the first guid is greater than the second, determined by turning the Guids into BigInts and comparing those values
         /// </summary>
         static bool Guid1IsGreater(Guid guid1, Guid guid2)//alternative method: split guid into string substrings, parseint, do what CompareTo does
         {
