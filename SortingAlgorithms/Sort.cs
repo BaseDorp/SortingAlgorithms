@@ -30,13 +30,13 @@ namespace SortingAlgorithms
         /// </summary>
         public static void FileReader()
         {
-            using (var streamReader = new StreamReader(@"C:\CSVfolder\jc-ma.csv"))//this is the location of the CSV file it will read
+            using (var streamReader = new StreamReader(@"C:\CSVfolder\jb.csv"))//this is the location of the CSV file it will read
             {
                 while (!streamReader.EndOfStream)
                 {
                     var line = streamReader.ReadLine();
                     var values = line.Split(',');
-                    theInts.Add(Int32.Parse(values[2]));
+                    theInts.Add(Int32.Parse(values[0]));
                     theGuids.Add(Guid.Parse(values[1]));
                     theDoubles.Add(Double.Parse(values[2]));
 
@@ -71,7 +71,7 @@ namespace SortingAlgorithms
             }
             Console.Write("\n");
         }
-        
+
 
         /// <summary>
         /// Justin's Bucket Sorts
@@ -80,14 +80,52 @@ namespace SortingAlgorithms
         /// <returns></returns>
         public static List<Guid> BucketSort(List<Guid> theData)
         {
-            return new List<Guid>();
+            List<Guid> result = new List<Guid>();
+
+            int numOfBuckets = 1000;
+
+            List<Guid>[] buckets = new List<Guid>[numOfBuckets];
+            for (int i = 0; i < numOfBuckets; i++)
+            {
+                buckets[i] = new List<Guid>();
+            }
+
+            for (int i = 0; i < theData.Count; i++)
+            {
+                int bucketChoice = (int)(Math.Abs(GuidFirstSectionToInt(theData[i]) % numOfBuckets));
+                buckets[bucketChoice].Add(theData[i]);
+            }
+
+            for (int i = 0; i < numOfBuckets; i++)
+            {
+                Guid[] temp = BubbleSort(buckets[i]);
+                result.AddRange(temp);
+            }
+            return result;
+        }
+
+        public static Guid[] BubbleSort(List<Guid> input)//used in bucket sort
+        {
+            for (int i = 0; i < input.Count; i++)
+            {
+                for (int j = 0; j < input.Count; j++)
+                {
+                    if (Guid1IsGreater(input[j], input[i]))
+                    {
+                        Guid temp = input[i];
+                        input[i] = input[j];
+                        input[j] = temp;
+                    }
+                }
+            }
+            return input.ToArray();
         }
 
         public static List<double> BucketSort(List<double> theData)
         {
             List<double> result = new List<double>();
 
-            int numOfBuckets = 10;
+            int numOfBuckets = 1000;
 
             List<double>[] buckets = new List<double>[numOfBuckets];
             for(int i = 0; i < numOfBuckets; i++)
@@ -97,7 +135,7 @@ namespace SortingAlgorithms
 
             for(int i = 0; i < theData.Count; i++)
             {
-                int bucketChoice = (int)(theData[i] / numOfBuckets);
+                int bucketChoice = (int)(theData[i] % numOfBuckets);
                 buckets[bucketChoice].Add(theData[i]);
             }
 
@@ -216,7 +254,7 @@ namespace SortingAlgorithms
             return bigInt;
         }
 
-        public static long GuidToLong(Guid g)
+        public static long GuidToLong(Guid g)//separates each delimited section of the guid into longs and sums their values
         {
             var line = g.ToString();
             var values = line.Split('-');
@@ -229,6 +267,14 @@ namespace SortingAlgorithms
             long totalValue = part1 + part2 + part3 + part4 + part5;
 
             return totalValue;
+        }
+        public static int GuidFirstSectionToInt(Guid g)//returns only the first section of the guid as an int, for putting the guids into different buckets for bucket sort
+        {
+            var line = g.ToString();
+            var values = line.Split('-');
+            var part1 = int.Parse(values[0], System.Globalization.NumberStyles.HexNumber);
+
+            return part1;
         }
     }
 }
