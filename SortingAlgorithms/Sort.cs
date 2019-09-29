@@ -75,6 +75,8 @@ namespace SortingAlgorithms
 
         /// <summary>
         /// Justin's Bucket Sorts
+        /// <see cref="https://www.csharpstar.com/csharp-program-to-perform-bucket-sort/"/>
+        /// <see cref="https://exceptionnotfound.net/bucket-sort-csharp-the-sorting-algorithm-family-reunion/"/>
         /// </summary>
         /// <param name="theData"></param>
         /// <returns></returns>
@@ -164,12 +166,21 @@ namespace SortingAlgorithms
             return input.ToArray();
         }
 
+        public static int GuidFirstSectionToInt(Guid g)//returns only the first section of the guid as an int, for putting the guids into different buckets for bucket sort
+        {
+            var line = g.ToString();
+            var values = line.Split('-');
+            var part1 = int.Parse(values[0], System.Globalization.NumberStyles.HexNumber);
+
+            return part1;
+        }
+
         /// <summary>
         /// Justin's Shell Sorts
         /// Currently implemented shell sort is a total cut and paste, just to examine functionality!
-        /// From: <see cref="https://www.tutorialspoint.com/shell-sort-program-in-chash"/>
-        /// From: <see cref="https://www.w3resource.com/csharp-exercises/searching-and-sorting-algorithm/searching-and-sorting-algorithm-exercise-1.php"/>
-        /// From: <see cref="https://www.geeksforgeeks.org/shellsort/"/>
+        /// <see cref="https://www.tutorialspoint.com/shell-sort-program-in-chash"/>
+        /// <see cref="https://www.w3resource.com/csharp-exercises/searching-and-sorting-algorithm/searching-and-sorting-algorithm-exercise-1.php"/>
+        /// <see cref="https://www.geeksforgeeks.org/shellsort/"/>
         /// </summary>
         /// <param name="theData"></param>
         /// <returns></returns>
@@ -267,14 +278,6 @@ namespace SortingAlgorithms
             long totalValue = part1 + part2 + part3 + part4 + part5;
 
             return totalValue;
-        }
-        public static int GuidFirstSectionToInt(Guid g)//returns only the first section of the guid as an int, for putting the guids into different buckets for bucket sort
-        {
-            var line = g.ToString();
-            var values = line.Split('-');
-            var part1 = int.Parse(values[0], System.Globalization.NumberStyles.HexNumber);
-
-            return part1;
         }
     }
 }
