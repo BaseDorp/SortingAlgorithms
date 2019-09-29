@@ -14,13 +14,14 @@ namespace SortingAlgorithms
 
             Console.WriteLine("Press enter to begin sort.");
             Console.ReadLine();
-            Sort.ShellSort(Sort.theGuids);
+            //Sort.ShellSort(Sort.theGuids);
             //Sort.BucketSort(Sort.doublesArray);
+            Sort.theDoubles = Sort.BucketSort(Sort.theDoubles);
             Console.WriteLine("Done sorting. Press enter to show sorted list.");
             Console.ReadLine();
             //Console.WriteLine("[{0}]", string.Join(", ", Sort.doublesArray));
-            Sort.ShowElementsOfList(Sort.theGuids);
-            //Sort.ShowElementsOfList(Sort.theDoubles);
+            //Sort.ShowElementsOfList(Sort.theGuids);
+            Sort.ShowElementsOfList(Sort.theDoubles);
             Console.WriteLine("Done showing list. Press enter to exit program.");
             Console.ReadLine();
 

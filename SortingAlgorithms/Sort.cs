@@ -36,7 +36,7 @@ namespace SortingAlgorithms
                 {
                     var line = streamReader.ReadLine();
                     var values = line.Split(',');
-                    theInts.Add(Int32.Parse(values[0]));
+                    theInts.Add(Int32.Parse(values[2]));
                     theGuids.Add(Guid.Parse(values[1]));
                     theDoubles.Add(Double.Parse(values[2]));
 
@@ -55,6 +55,14 @@ namespace SortingAlgorithms
             }
             Console.Write("\n");
         }
+        public static void ShowElementsOfList(List<int> d)
+        {
+            foreach (var element in d)
+            {
+                Console.Write(element + " ");
+            }
+            Console.Write("\n");
+        }
         public static void ShowElementsOfList(List<Guid> g)
         {
             foreach (var element in g)
@@ -63,82 +71,7 @@ namespace SortingAlgorithms
             }
             Console.Write("\n");
         }
-
-        /////////////////////////////////////////////
-        /// Functions used in bucket sort
-
-
-        public static double getMaximumValue(List<Double> dList)//finds the largest double in the list, for bucket sort
-        {
-            double maximumValue = dList[0];
-            int listSize = dList.Count;
-            for (int i = 1; i < listSize; i++)
-            {
-                if(dList[i] > maximumValue)
-                {
-                    maximumValue = dList[i];
-                }
-            }
-            return maximumValue;
-        }
-        public static double getMinimumValue(List<Double> dList)//finds the smallest double in the list, for bucket sort
-        {
-            double minimumValue = dList[0];
-            int listSize = dList.Count;
-            for (int i = 1; i < listSize; i++)
-            {
-                if (dList[i] < minimumValue)
-                {
-                    minimumValue = dList[i];
-                }
-            }
-            return minimumValue;
-        }
-
-        public static void Scatter(double[] array, List<List<double>> buckets)
-        {
-            foreach (double value in array)
-            {
-                int bucketNumber = GetBucketNumber(value);
-                buckets[bucketNumber].Add(value);
-            }
-        }
-
-        public static void InsertionSort(double[] array)
-        {
-            int j;
-            double temp;
-
-            for (int i = 1; i < array.Length; i++)
-            {
-                j = i;
-                while (j > 0 && array[j] < array[j - 1])
-                {
-                    temp = array[j];
-                    array[j] = array[j - 1];
-                    array[j - 1] = temp;
-                    j--;
-                }
-            }
-        }
-
-        public static int GetBucketNumber(double value)
-        {
-            double val = value % 10;
-            int bucketNumber = (int)Math.Floor(val);
-            return bucketNumber;
-        }
-
-        public static void InitializeBuckets(List<List<double>> buckets)
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                List<double> a = new List<double>();
-                buckets.Add(a);
-            }
-        }
         
-        ///////////////////////////////////////////////////////////
 
         /// <summary>
         /// Justin's Bucket Sorts
@@ -149,26 +82,48 @@ namespace SortingAlgorithms
         {
             return new List<Guid>();
         }
-        public static double[] BucketSort(double[] array)
+
+        public static List<double> BucketSort(List<double> theData)
         {
-            List<List<double>> buckets = new List<List<double>>();
-            InitializeBuckets(buckets);
+            List<double> result = new List<double>();
 
-            Scatter(array, buckets);
+            int numOfBuckets = 10;
 
-            int i = 0;
-            foreach (List<double> bucket in buckets)
+            List<double>[] buckets = new List<double>[numOfBuckets];
+            for(int i = 0; i < numOfBuckets; i++)
             {
-                double[] arr = bucket.ToArray();
-                InsertionSort(arr);
-
-                foreach (double d in arr)
-                {
-                    array[i++] = d;
-                }
+                buckets[i] = new List<double>();
             }
 
-            return array;
+            for(int i = 0; i < theData.Count; i++)
+            {
+                int bucketChoice = (int)(theData[i] / numOfBuckets);
+                buckets[bucketChoice].Add(theData[i]);
+            }
+
+            for(int i = 0; i < numOfBuckets; i ++)
+            {
+                double[] temp = BubbleSort(buckets[i]);
+                result.AddRange(temp);
+            }
+            return result;
+        }
+
+        public static double[] BubbleSort(List<double> input)//used in bucket sort
+        {
+            for(int i = 0; i < input.Count; i++)
+            {
+                for(int j = 0; j < input.Count; j++)
+                {
+                    if (input[i] < input[j])
+                    {
+                        double temp = input[i];
+                        input[i] = input[j];
+                        input[j] = temp;
+                    }
+                }
+            }
+            return input.ToArray();
         }
 
         /// <summary>
