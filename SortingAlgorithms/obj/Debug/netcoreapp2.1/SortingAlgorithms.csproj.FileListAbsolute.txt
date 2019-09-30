@@ -9,3 +9,14 @@ D:\C#Projects\Algorithms\SortingAlgorithms\SortingAlgorithms\SortingAlgorithms\o
 D:\C#Projects\Algorithms\SortingAlgorithms\SortingAlgorithms\SortingAlgorithms\obj\Debug\netcoreapp2.1\SortingAlgorithms.AssemblyInfo.cs
 D:\C#Projects\Algorithms\SortingAlgorithms\SortingAlgorithms\SortingAlgorithms\obj\Debug\netcoreapp2.1\SortingAlgorithms.dll
 D:\C#Projects\Algorithms\SortingAlgorithms\SortingAlgorithms\SortingAlgorithms\obj\Debug\netcoreapp2.1\SortingAlgorithms.pdb
+C:\CSVSorting\SortingAlgorithms\SortingAlgorithms\obj\Debug\netcoreapp2.1\SortingAlgorithms.csprojAssemblyReference.cache
+C:\CSVSorting\SortingAlgorithms\SortingAlgorithms\obj\Debug\netcoreapp2.1\SortingAlgorithms.csproj.CoreCompileInputs.cache
+C:\CSVSorting\SortingAlgorithms\SortingAlgorithms\obj\Debug\netcoreapp2.1\SortingAlgorithms.AssemblyInfoInputs.cache
+C:\CSVSorting\SortingAlgorithms\SortingAlgorithms\obj\Debug\netcoreapp2.1\SortingAlgorithms.AssemblyInfo.cs
+C:\CSVSorting\SortingAlgorithms\SortingAlgorithms\obj\Debug\netcoreapp2.1\SortingAlgorithms.dll
+C:\CSVSorting\SortingAlgorithms\SortingAlgorithms\obj\Debug\netcoreapp2.1\SortingAlgorithms.pdb
+C:\CSVSorting\SortingAlgorithms\SortingAlgorithms\bin\Debug\netcoreapp2.1\SortingAlgorithms.deps.json
+C:\CSVSorting\SortingAlgorithms\SortingAlgorithms\bin\Debug\netcoreapp2.1\SortingAlgorithms.runtimeconfig.json
+C:\CSVSorting\SortingAlgorithms\SortingAlgorithms\bin\Debug\netcoreapp2.1\SortingAlgorithms.runtimeconfig.dev.json
+C:\CSVSorting\SortingAlgorithms\SortingAlgorithms\bin\Debug\netcoreapp2.1\SortingAlgorithms.dll
+C:\CSVSorting\SortingAlgorithms\SortingAlgorithms\bin\Debug\netcoreapp2.1\SortingAlgorithms.pdb
