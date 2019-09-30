@@ -12,6 +12,11 @@ namespace SortingAlgorithms
         public static List<Guid> theGuids = new List<Guid>();
         public static List<Double> theDoubles = new List<Double>();
 
+<<<<<<< HEAD
+        public static int guidsListLength;
+        public static int doublesListLength;
+        
+=======
         List<double> TestDoubles = new List<double> {1,4,5,8,2,10};
 
         public static int guidsListLength;
@@ -19,12 +24,18 @@ namespace SortingAlgorithms
 
         public static string filePath = "C:\\CSVfolder\\jb.csv";
         //Sam's filepath: "D:\C#Projects\Algorithms\SortingAlgorithms\SortingAlgorithms\SortingAlgorithms\bin\Debug\netcoreapp2.1\jb.csv"
+>>>>>>> 947f5205d339480cb4e43cf6b57c4530960310ea
 
         /// <summary>
         /// Splits the CSV, putting each of the items into the appropriate list. you can then reference them using, for example, Sort.theInts[999999] to find the final int
         /// </summary>
         public static void FileReader()
         {
+<<<<<<< HEAD
+            // Sets the filepath that reads the data from \SortingAlgorithms\bin\Debug\netcoreapp2.1\Data.csv
+            string filePath = Directory.GetCurrentDirectory() + @"\Data.csv";
+=======
+>>>>>>> 947f5205d339480cb4e43cf6b57c4530960310ea
             using (var streamReader = new StreamReader(@filePath))
             {
                 while (!streamReader.EndOfStream)
@@ -99,11 +110,19 @@ namespace SortingAlgorithms
 
 
         /// <summary>
+<<<<<<< HEAD
+        /// Bucket Sort -------------------------------------------------------------------------------------------
+        /// <see cref="https://www.csharpstar.com/csharp-program-to-perform-bucket-sort/"/>
+        /// <see cref="https://exceptionnotfound.net/bucket-sort-csharp-the-sorting-algorithm-family-reunion/"/>
+        /// </summary>
+        /// <param name="theData">Instance of the list of Guids</param>
+=======
         /// Justin's Bucket Sorts
         /// <see cref="https://www.csharpstar.com/csharp-program-to-perform-bucket-sort/"/>
         /// <see cref="https://exceptionnotfound.net/bucket-sort-csharp-the-sorting-algorithm-family-reunion/"/>
         /// </summary>
         /// <param name="theData"></param>
+>>>>>>> 947f5205d339480cb4e43cf6b57c4530960310ea
         /// <returns></returns>
         public static void BucketSort(List<Guid> theData)
         {
@@ -180,6 +199,10 @@ namespace SortingAlgorithms
                 double[] temp = BubbleSortForBucket(buckets[i]);
                 result.AddRange(temp);
             }
+<<<<<<< HEAD
+            
+=======
+>>>>>>> 947f5205d339480cb4e43cf6b57c4530960310ea
             watch.Stop();
             ShowElementsOfList(result);
             Console.WriteLine("Done! Shell sort took " + watch.ElapsedMilliseconds / 1000 + " seconds.");
@@ -201,6 +224,12 @@ namespace SortingAlgorithms
             }
             return input.ToArray();
         }
+<<<<<<< HEAD
+        
+        /// <summary>
+        /// Shell Sort ---------------------------------------------------------------------------------------------
+        /// Currently implemented shell sort is a total cut and paste, just to examine functionality!
+=======
 
         public static int GuidFirstSectionToInt(Guid g)//returns only the first delimited section of the guid as an int, used to decide which bucket to place the guids into when bucket sorting
         {
@@ -213,14 +242,18 @@ namespace SortingAlgorithms
 
         /// <summary>
         /// Justin's Shell Sorts
+>>>>>>> 947f5205d339480cb4e43cf6b57c4530960310ea
         /// <see cref="https://www.tutorialspoint.com/shell-sort-program-in-chash"/>
         /// <see cref="https://www.w3resource.com/csharp-exercises/searching-and-sorting-algorithm/searching-and-sorting-algorithm-exercise-1.php"/>
         /// <see cref="https://www.geeksforgeeks.org/shellsort/"/>
         /// </summary>
         /// <param name="theData"></param>
         /// <returns></returns>
+<<<<<<< HEAD
+=======
         /// 
 
+>>>>>>> 947f5205d339480cb4e43cf6b57c4530960310ea
         public static void ShellSort(List<Double> dList)//Time complexity: O(N^2). Gap size is reduced by half every iteration. too few gaps slow down the passes, and too many gaps produces overhead
         {
             int n = dList.Count;//n is the size of our list
@@ -277,6 +310,20 @@ namespace SortingAlgorithms
             ShowElementsOfList(theGuids);
             Console.WriteLine("Done! Shell sort took " + watch.ElapsedMilliseconds / 1000 + " seconds.");
         }
+<<<<<<< HEAD
+        
+        // Guid Sorting Methods ---------------------------------------------------------------------------------------
+        public static int GuidFirstSectionToInt(Guid g)//returns only the first delimited section of the guid as an int, used to decide which bucket to place the guids into when bucket sorting
+        {
+            var line = g.ToString();
+            var values = line.Split('-');
+            var part1 = int.Parse(values[0], System.Globalization.NumberStyles.HexNumber);
+
+            return part1;
+        }
+
+=======
+>>>>>>> 947f5205d339480cb4e43cf6b57c4530960310ea
         /// <summary>
         /// This version of guid comparison uses GuidToBigInt, which uses Guid.ToByteArray
         /// </summary>
@@ -289,6 +336,10 @@ namespace SortingAlgorithms
             else
                 return false;
         }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 947f5205d339480cb4e43cf6b57c4530960310ea
         /// <summary>
         /// This version of guid comparison uses GuidToLong, which separates the guid via its delimiters, converts each part of the guid to a long, and sums them to compare the final values
         /// This function isn't actively used anywhere, but I added it in case the GuidToBigInt's use of Guid.ToByteArray was considered too much of an 'easy solution'
@@ -331,7 +382,11 @@ namespace SortingAlgorithms
 
 
         /// <summary>
+<<<<<<< HEAD
+        /// Bubble Sort ----------------------------------------------------------------------------------------------
+=======
         /// Bubble Sort Method: Jared Bronstein ---------------------------------------------
+>>>>>>> 947f5205d339480cb4e43cf6b57c4530960310ea
         /// References
         /// <see cref="https://www.w3resource.com/csharp-exercises/searching-and-sorting-algorithm/searching-and-sorting-algorithm-exercise-3.php"/>
         /// <see cref="https://www.geeksforgeeks.org/bubble-sort/"/>
@@ -350,11 +405,19 @@ namespace SortingAlgorithms
                 {
                     if (Guid1IsGreater(theData[r], theData[r + 1]))
                     {
+<<<<<<< HEAD
+                        b = theData[r + 1];
+=======
                         b = theData[r+1];
+>>>>>>> 947f5205d339480cb4e43cf6b57c4530960310ea
                         theData[r + 1] = theData[r];
                         theData[r] = b;
                     }
                 }
+<<<<<<< HEAD
+                Console.WriteLine("{0}. {1}", s, theData[s]);
+=======
+>>>>>>> 947f5205d339480cb4e43cf6b57c4530960310ea
             }
             watch.Stop();
             ShowElementsOfList(theData);
@@ -376,6 +439,10 @@ namespace SortingAlgorithms
                         theData[r] = b;
                     }
                 }
+<<<<<<< HEAD
+                Console.WriteLine("{0}. {1}", s, theData[s]);
+=======
+>>>>>>> 947f5205d339480cb4e43cf6b57c4530960310ea
             }
             watch.Stop();
             ShowElementsOfList(theData);
@@ -386,6 +453,10 @@ namespace SortingAlgorithms
         // Selection Sort -------------------------------------------------------------------
         /// <summary>
         /// <see cref="https://www.w3resource.com/csharp-exercises/searching-and-sorting-algorithm/searching-and-sorting-algorithm-exercise-11.php"
+<<<<<<< HEAD
+        /// <see cref="https://exceptionnotfound.net/selection-sort-csharp-the-sorting-algorithm-family-reunion/"/>
+=======
+>>>>>>> 947f5205d339480cb4e43cf6b57c4530960310ea
         /// </summary>
         /// <param name="g"></param>
         void Selection(List<Guid> g)
@@ -395,7 +466,11 @@ namespace SortingAlgorithms
             Guid temp;
             for (int i = 0; i < g.Count; i++)
             {
+<<<<<<< HEAD
+                for (int n = i + 1; n < g.Count; n++)
+=======
                 for (int n = i+1; n < g.Count; n++)
+>>>>>>> 947f5205d339480cb4e43cf6b57c4530960310ea
                 {
                     if (Guid1IsGreater(g[n], g[i]))
                     {
@@ -404,6 +479,10 @@ namespace SortingAlgorithms
                         g[n] = temp;
                     }
                 }
+<<<<<<< HEAD
+                Console.WriteLine("{0}. {1}", i, g[i]);
+=======
+>>>>>>> 947f5205d339480cb4e43cf6b57c4530960310ea
             }
             watch.Stop();
             ShowElementsOfList(theGuids);
@@ -417,7 +496,11 @@ namespace SortingAlgorithms
             var watch = System.Diagnostics.Stopwatch.StartNew();
             for (int i = 0; i < d.Count; i++)
             {
+<<<<<<< HEAD
+                for (int n = i + 1; n < d.Count; n++)
+=======
                 for (int n = i+1; n < d.Count; n++)
+>>>>>>> 947f5205d339480cb4e43cf6b57c4530960310ea
                 {
                     if (d[n] < d[i])
                     {
@@ -426,13 +509,20 @@ namespace SortingAlgorithms
                         d[n] = temp;
                     }
                 }
+<<<<<<< HEAD
+                Console.WriteLine("{0}. {1}",i, d[i]);
+=======
                 // Console.WriteLine("{0}. {1}",i, d[i]);
+>>>>>>> 947f5205d339480cb4e43cf6b57c4530960310ea
             }
             watch.Stop();
             ShowElementsOfList(theDoubles);
             Console.WriteLine("Done! Selection sort took " + watch.ElapsedMilliseconds / 1000 + " seconds.");
         }
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 947f5205d339480cb4e43cf6b57c4530960310ea
     }
 }
