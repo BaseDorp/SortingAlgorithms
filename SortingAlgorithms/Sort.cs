@@ -213,7 +213,6 @@ namespace SortingAlgorithms
 
         /// <summary>
         /// Justin's Shell Sorts
-        /// Currently implemented shell sort is a total cut and paste, just to examine functionality!
         /// <see cref="https://www.tutorialspoint.com/shell-sort-program-in-chash"/>
         /// <see cref="https://www.w3resource.com/csharp-exercises/searching-and-sorting-algorithm/searching-and-sorting-algorithm-exercise-1.php"/>
         /// <see cref="https://www.geeksforgeeks.org/shellsort/"/>
