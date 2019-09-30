@@ -292,6 +292,8 @@ namespace SortingAlgorithms
         }
         /// <summary>
         /// This version of guid comparison uses GuidToLong, which separates the guid via its delimiters, converts each part of the guid to a long, and sums them to compare the final values
+        /// This function isn't actively used anywhere, but I added it in case the GuidToBigInt's use of Guid.ToByteArray was considered too much of an 'easy solution'
+        /// Any function using Guid1IsGreater should be able to substitute Guid1IsGreaterUsingLong and achieve similar results
         /// </summary>
         public static bool Guid1IsGreaterUsingLong(Guid guid1, Guid guid2)
         {
@@ -307,13 +309,13 @@ namespace SortingAlgorithms
             }
         }
 
-        static BigInteger GuidToBigInt(Guid g)
+        static BigInteger GuidToBigInt(Guid g)//turns a guid into a big integer for comparison in Guid1IsGreater
         {
             BigInteger bigInt = new BigInteger(g.ToByteArray());
             return bigInt;
         }
 
-        public static long GuidToLong(Guid g)//separates each delimited section of the guid into longs and sums their values
+        public static long GuidToLong(Guid g)//separates each delimited section of the guid into longs and sums their values, for use in Guid1IsGreaterUsingLong
         {
             var line = g.ToString();
             var values = line.Split('-');
@@ -340,7 +342,8 @@ namespace SortingAlgorithms
         /// <returns>The sorted list of the CSV file data</returns>
         public static void BubbleSort(List<Guid> theData)
         {
-            Console.WriteLine("Sorting...");
+            Console.WriteLine("Sorting guids using bubble sort...");
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             Guid b;
             for (int s = 0; s <= theData.Count - 2; s++)
             {
@@ -354,15 +357,14 @@ namespace SortingAlgorithms
                     }
                 }
             }
-            foreach (Guid item in theData)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("Done!");
+            watch.Stop();
+            ShowElementsOfList(theData);
+            Console.WriteLine("Done! Bubble sort took " + watch.ElapsedMilliseconds / 1000 + " seconds.");
         }
         public static void BubbleSort(List<double> theData)
         {
             Console.WriteLine("Sorting...");
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             double b;
             for (int s = 0; s <= theData.Count - 2; s++)
             {
@@ -376,11 +378,9 @@ namespace SortingAlgorithms
                     }
                 }
             }
-            foreach (double item in theData)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("Done!");
+            watch.Stop();
+            ShowElementsOfList(theData);
+            Console.WriteLine("Done! Bubble sort took " + watch.ElapsedMilliseconds / 1000 + " seconds.");
         }
 
 
@@ -391,7 +391,8 @@ namespace SortingAlgorithms
         /// <param name="g"></param>
         void Selection(List<Guid> g)
         {
-            Console.WriteLine("Sorting...");
+            Console.WriteLine("Sorting guids using selection sort...");
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             Guid temp;
             for (int i = 0; i < g.Count; i++)
             {
@@ -405,17 +406,16 @@ namespace SortingAlgorithms
                     }
                 }
             }
-            foreach (Guid item in g)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("Done!");
+            watch.Stop();
+            ShowElementsOfList(theGuids);
+            Console.WriteLine("Done! Selection sort took " + watch.ElapsedMilliseconds / 1000 + " seconds.");
         }
 
         void Selection(List<double> d)
         {
             double temp = 0;
-            Console.WriteLine("Sorting...");
+            Console.WriteLine("Sorting doubles using selection sort...");
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             for (int i = 0; i < d.Count; i++)
             {
                 for (int n = i+1; n < d.Count; n++)
@@ -429,11 +429,9 @@ namespace SortingAlgorithms
                 }
                 // Console.WriteLine("{0}. {1}",i, d[i]);
             }
-            foreach (double item in d)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("Done!");
+            watch.Stop();
+            ShowElementsOfList(theDoubles);
+            Console.WriteLine("Done! Selection sort took " + watch.ElapsedMilliseconds / 1000 + " seconds.");
         }
 
 
