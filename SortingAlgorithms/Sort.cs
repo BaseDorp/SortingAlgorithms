@@ -17,7 +17,8 @@ namespace SortingAlgorithms
         public static int guidsListLength;
         public static int doublesListLength;
 
-        public static string filePath = "C:\\CSVfolder\\jb.csv";
+        //For this filepath, you'll need to create a "CSVsorting" folder on your C drive and place the provided csv there. Alternatively, you can use Sam's filepath below this.
+        public static string filePath = "C:\\CSVsorting\\jb.csv";
         //Sam's filepath: "D:\C#Projects\Algorithms\SortingAlgorithms\SortingAlgorithms\SortingAlgorithms\bin\Debug\netcoreapp2.1\jb.csv"
 
         /// <summary>
@@ -386,6 +387,7 @@ namespace SortingAlgorithms
         // Selection Sort -------------------------------------------------------------------
         /// <summary>
         /// <see cref="https://www.w3resource.com/csharp-exercises/searching-and-sorting-algorithm/searching-and-sorting-algorithm-exercise-11.php"
+        /// <see cref="https://exceptionnotfound.net/selection-sort-csharp-the-sorting-algorithm-family-reunion/"/>
         /// </summary>
         /// <param name="g"></param>
         void Selection(List<Guid> g)
